@@ -37,7 +37,11 @@ docker-compose up
 
 ## Contributors
 
-- [Jose Emilio Labra Gayo - Alejandro Olea - Cristian Valdebenito - Felipe Vergara - Manuel Ahumada](http://labra.weso.es)
+- [Jose Emilio Labra Gayo]
+- [Alejandro Olea]
+- [Cristian Valdebenito]
+- [Felipe Vergara]
+- [Manuel Ahumada]
 
 ## Credits
 
