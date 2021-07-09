@@ -1,0 +1,38 @@
+<html>
+<head>
+ <title>Example</title>
+ <link rel="stylesheet" href="style.css">
+ <script src="code.js"></script>
+</head>
+<body>
+<img src='img/barra.png'   style="height:auto; width:100%; padding: 0;">
+<img src='img/logo.png' style="position: absolute; top:4px; left:2%" >
+<input type=text value=search class='busqueda' style="position: absolute; top:10px; left:80%;"></input>
+	<a href="#" style="position: absolute; top:10px; left:10%">Home - Inicio</a>
+	<a href="#" style="position: absolute; top:10px; left:13%">API-REST</a>
+	<a href="#" STYLE="background: #3D94F6;
+   background-image: -webkit-linear-gradient(top, #3D94F6, #1E62D0);
+   background-image: -moz-linear-gradient(top, #3D94F6, #1E62D0);
+   background-image: -ms-linear-gradient(top, #3D94F6, #1E62D0);
+   background-image: -o-linear-gradient(top, #3D94F6, #1E62D0);
+   background-image: -webkit-gradient(to bottom, #3D94F6, #1E62D0);
+   -webkit-border-radius: 10px;
+   -moz-border-radius: 10px;
+   border-radius: 0px;
+   color: #FFFFFF;
+   font-family: Courier New;
+   font-size: 15px;
+   font-weight: 50;
+   padding: 10px;
+   -webkit-box-shadow: 1px 1px 10px 0 #000000;
+   -moz-box-shadow: 1px 1px 10px 0 #000000;
+   box-shadow: 1px 1px 10px 0 #000000;
+   text-shadow: 1px 1px 10px #000000;
+   border: solid #337FED 1px;
+   text-decoration: none;
+   display: inline-block;
+   cursor: pointer;
+   text-align: center;  width:42px; height:-15px; position: absolute; top:2px; left:18%"">crear</a>
+<ul id="entities" />
+</html>
+
