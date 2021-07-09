@@ -1,0 +1,30 @@
+h1 {
+  color: blue; 
+}
+body { margin: 0px; }
+header {
+ border:none;
+ margin:0; 
+    display:block
+}
+
+a:link {
+  color: White;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:visited {
+  color: White;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:hover {
+  color: White;
+  background-color: transparent;
+  text-decoration: underline;
+}
+a:active {
+  color: White;
+  background-color: transparent;
+  text-decoration: underline;
+}
