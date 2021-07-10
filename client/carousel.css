@@ -48,8 +48,8 @@ body {
 }
 /* rtl:begin:ignore */
 .marketing .col-lg-4 p {
-  margin-right: .45rem;
-  margin-left: .45rem;
+  margin-right: .75rem;
+  margin-left: .75rem;
 }
 /* rtl:end:ignore */
 
@@ -58,7 +58,7 @@ body {
 ------------------------- */
 
 .featurette-divider {
-  margin: 5rem 0; /* Space out the Bootstrap <hr> more */
+  margin: 1rem 0; /* Space out the Bootstrap <hr> more */
 }
 
 /* Thin out the marketing headings */
@@ -66,7 +66,7 @@ body {
   font-weight: 300;
   line-height: 1;
   /* rtl:remove */
-  letter-spacing: -.05rem;
+  letter-spacing: .05rem;
 }
 
 
