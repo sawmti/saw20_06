@@ -18,7 +18,7 @@ async function getEntities(entidad) {
                         <a href="https://www.wikidata.org/wiki/`+fila.idtopico+`">WikiData (`+fila.idtopico+`)</a>
                     </div>
                     <div class="col-md-5">            
-                        <img src="`+(fila.urlimagen === undefined ? 'https://image.freepik.com/vector-gratis/pagina-error-404-no-encontrada_41910-364.jpg': fila.urlimagen )+`" width="500" height="500" />        
+                        <img src="`+(fila.urlimagen === undefined ? 'https://image.freepik.com/vector-gratis/pagina-error-404-no-encontrada_41910-364.jpg': fila.urlimagen )+`" width="250" height="250" />        
                     </div>
                 </div>            
                             `;
@@ -35,7 +35,7 @@ async function getEntities(entidad) {
                         <a href="https://www.wikidata.org/wiki/`+fila.idtopico+`">WikiData (`+fila.idtopico+`)</a>
                     </div>
                     <div class="col-md-5 order-md-1">            
-                        <img src="`+(fila.urlimagen === undefined ? 'https://image.freepik.com/vector-gratis/pagina-error-404-no-encontrada_41910-364.jpg': fila.urlimagen )+`" width="500" height="500" />
+                        <img src="`+(fila.urlimagen === undefined ? 'https://image.freepik.com/vector-gratis/pagina-error-404-no-encontrada_41910-364.jpg': fila.urlimagen )+`" width="250" height="250" />
                     </div>
                 </div>          
                             `;
