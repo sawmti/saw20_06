@@ -10,7 +10,7 @@ async function getEntities(entidad) {
             if(i % 2 === 0)            
             {
                 div.innerHTML = `
-                <hr class="featurette-divider">
+                
                 <div class="row featurette">
                     <div class="col-md-7">
                         <h2 class="featurette-heading">`+fila.descripcion+`</h2>
@@ -20,14 +20,15 @@ async function getEntities(entidad) {
                     <div class="col-md-5">            
                         <img src="`+(fila.urlimagen === undefined ? 'https://image.freepik.com/vector-gratis/pagina-error-404-no-encontrada_41910-364.jpg': fila.urlimagen )+`" width="250" height="250" />        
                     </div>
-                </div>            
+                </div>   
+				<hr class="featurette-divider">
                             `;
             }
             else
             {
 
                 div.innerHTML = `
-                <hr class="featurette-divider">
+
                 <div class="row featurette">
                     <div class="col-md-7 order-md-2">
                         <h2 class="featurette-heading">`+fila.descripcion+`</h2>
@@ -37,7 +38,8 @@ async function getEntities(entidad) {
                     <div class="col-md-5 order-md-1">            
                         <img src="`+(fila.urlimagen === undefined ? 'https://image.freepik.com/vector-gratis/pagina-error-404-no-encontrada_41910-364.jpg': fila.urlimagen )+`" width="250" height="250" />
                     </div>
-                </div>          
+                </div>
+<hr class="featurette-divider">				
                             `;
             }
             
