@@ -34,6 +34,80 @@ body {
   height: 32rem;
 }
 
+.boton1 {
+	box-shadow: 0px 0px 0px 2px #9fb4f2;
+	background:linear-gradient(to bottom, #7892c2 5%, #476e9e 100%);
+	background-color:#7892c2;
+	border-radius:3px;
+	border:1px solid #4e6096;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:10px;
+	padding:4px 17px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #283966;
+}
+.boton1:hover {
+	background:linear-gradient(to bottom, #476e9e 5%, #7892c2 100%);
+	background-color:#476e9e;
+}
+.boton1:active {
+	position:relative;
+	top:1px;
+}
+
+.boton2 {
+	box-shadow: 0px 0px 0px 2px #f09e9e;
+	background:linear-gradient(to bottom, #c27878 5%, #9c4646 100%);
+	background-color:#c27878;
+	border-radius:3px;
+	border:1px solid #944d4d;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:10px;
+	padding:4px 17px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #662929;
+}
+.boton2:hover {
+	background:linear-gradient(to bottom, #9c4646 5%, #c27878 100%);
+	background-color:#9c4646;
+}
+.boton2:active {
+	position:relative;
+	top:1px;
+}
+
+.boton3 {
+	box-shadow: 0px 0px 0px 2px #9ef09f;
+	background:linear-gradient(to bottom, #78c279 5%, #469c48 100%);
+	background-color:#78c279;
+	border-radius:3px;
+	border:1px solid #4e9455;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:10px;
+	padding:4px 17px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2a6632;
+}
+.boton3:hover {
+	background:linear-gradient(to bottom, #469c48 5%, #78c279 100%);
+	background-color:#469c48;
+}
+.boton3:active {
+	position:relative;
+	top:1px;
+}
+
+        
+
 
 /* MARKETING CONTENT
 -------------------------------------------------- */
