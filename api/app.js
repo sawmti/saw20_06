@@ -77,7 +77,18 @@ app.get('/entidades/:txtEntidad', function(req, response){
                     idtopico: propertyName,
                     descripcion: descripcionPropiedad,
                     label: labelPropiedad,
-                    urlimagen: urlImagen
+                    urlimagen: urlImagen,
+                    favorito: false,
+                    anotaciones: [
+                      {
+                        nombre: "anotacion1",
+                        detalle: "detalle1"
+                      },
+                      {
+                        nombre: "anotacion2",
+                        detalle: "detalle2"
+                      }
+                    ]
                   };
 
                   urlImagen = undefined;
@@ -91,6 +102,5 @@ app.get('/entidades/:txtEntidad', function(req, response){
             });
       });
 });
-
 
 module.exports = app

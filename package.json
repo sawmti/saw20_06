@@ -9,7 +9,7 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watchAll",
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "start:watch": "nodemon server.js"
   },
   "keywords": [],
@@ -19,6 +19,7 @@
     "blueimp-md5": "^2.18.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "mongodb": "^4.0.0",
     "node-fetch": "^2.6.1",
     "nodemon": "^2.0.12",
     "wikidata-sdk": "^7.13.0"
