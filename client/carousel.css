@@ -8,6 +8,13 @@ body {
   color: #5a5a5a;
 }
 
+.divBorde{
+	border: 1px solid lightgray;
+	border-radius: 10px;
+	padding: 15px;	
+}
+
+
 
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
@@ -44,8 +51,8 @@ body {
 	cursor:pointer;
 	color:#ffffff;
 	font-family:Arial;
-	font-size:10px;
-	padding:4px 17px;
+	font-size:14px;
+	padding:3px 11px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #283966;
 }
@@ -68,8 +75,8 @@ body {
 	cursor:pointer;
 	color:#ffffff;
 	font-family:Arial;
-	font-size:10px;
-	padding:4px 17px;
+	font-size:18px;
+	padding:0px 11px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #662929;
 }
@@ -92,8 +99,8 @@ body {
 	cursor:pointer;
 	color:#ffffff;
 	font-family:Arial;
-	font-size:10px;
-	padding:4px 17px;
+	font-size:19px;
+	padding:0px 11px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #2a6632;
 }
@@ -104,6 +111,51 @@ body {
 .boton3:active {
 	position:relative;
 	top:1px;
+}
+
+.boton4 {
+	box-shadow: 0px 0px 0px 2px #9fb4f2;
+	background:linear-gradient(to bottom, #c27878 5%, #9c4646 100%);
+	background-color:#c27878;
+	border-radius:3px;
+	border:1px solid #4e6096;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:14px;
+	padding:3px 11px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #283966;
+}
+.boton4:hover {
+	background:linear-gradient(to bottom, #9c4646 5%, #c27878 100%);
+	background-color:#9c4646;
+}
+.boton4:active {
+	position:relative;
+	top:1px;
+}
+
+input[type=text]{
+	border-radius: 8px;
+    padding: 5px;
+    font-size: 12px;
+    border-color: lightgrey;
+	margin-left: 3px;
+	margin-top: 3px;
+
+}
+
+
+[data-tooltip]:before {            
+    position : absolute;
+     content : attr(data-tooltip);
+     opacity : 0;
+}
+
+[data-tooltip]:hover:before {        
+    opacity : 1;
 }
 
         
