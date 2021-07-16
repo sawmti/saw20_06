@@ -52,7 +52,10 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+            <a class="nav-link active" aria-current="page" href="#" id="btnInicio">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#" id="btnFavoritos">Favoritos</a>
           </li>
         </ul>
         <div class="d-flex">
@@ -66,6 +69,12 @@
 </header>
 
 <main>
+
+  <div class="container marketing">
+    <div id="divContenedor" style="margin-top: 25px; min-height: 700px; display: none;">
+    </div>
+  </div>
+  
 
   <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
@@ -124,10 +133,6 @@
   <!-- Wrap the rest of the page in another container to center all the content. -->
 
   <div class="container marketing">
-
-    <div id="divContenedor" style="margin-top: 75px;">      
-    </div>
-
     <!-- Three columns of text below the carousel -->
     <div class="row" style="margin-top: 50px;">
       <div class="col-lg-4">

@@ -5,6 +5,7 @@ var wbk = require('wikidata-sdk');
 var md5 = require('blueimp-md5'); 
 
 const app = express()
+app.use(express.json()) 
 const root = path.resolve(__dirname, '..')
 
 // Log invocations
@@ -22,9 +23,52 @@ app.get('/api/entities', (req,res) =>
 );
 
 
+
+var listaFavoritos = [{
+  idtopico: "Q2887",
+  descripcion: "capital de Chile",
+  label: "Santiago de Chile",
+  urlimagen: "https://upload.wikimedia.org/wikipedia/commons/c/ce/Santiago_en_invierno.jpg",
+  favorito: true,
+  anotaciones: [
+    {
+      nombre: "Poblacion",
+      detalle: "8MM",
+    },
+    {
+      nombre: "Region",
+      detalle: "Metropolitana",
+    },    
+  ],
+}];
+
+app.delete('/quitarfavorito', function(req, response){
+  console.log(req.body);
+  let itemFavorito = req.body;
+
+  listaFavoritos.forEach(function(result, index) {
+    if(result['idtopico'] === itemFavorito.idtopico) {
+      listaFavoritos.splice(index, 1);
+    }    
+  });
+
+  response.sendStatus(201);  
+});
+
+app.post('/agregarfavorito', function(req, response){
+  console.log(req.body);
+  let itemFavorito = req.body;
+  listaFavoritos.push(itemFavorito);  
+  response.sendStatus(201);  
+});
+
+app.get('/obtenerfavoritos', function(req, response){
+  response.send(listaFavoritos);
+});
+
 app.get('/entidades/:txtEntidad', function(req, response){  
 
-  var entidad = req.params.txtEntidad;
+  let entidad = req.params.txtEntidad;
   const urlentidad = wbk.searchEntities(entidad);   
  
   fetch(urlentidad)
@@ -46,7 +90,7 @@ app.get('/entidades/:txtEntidad', function(req, response){
             .then(entities => {
 
               var listacompuesta = [];
-              
+
               for (var propertyName in entities) {
                 var listadoPropiedades = entities[propertyName];
                 var descripcionPropiedad = (listadoPropiedades.descriptions.es === undefined ? '-' : listadoPropiedades.descriptions.es);
@@ -73,27 +117,36 @@ app.get('/entidades/:txtEntidad', function(req, response){
 
                 if (descripcionPropiedad != '-') {
                   console.log('(' + propertyName + ') ' + descripcionPropiedad + ' - ' + labelPropiedad + '  = URL(' + (urlImagen === undefined?'-': urlImagen) + ')');
-                  var item = {
-                    idtopico: propertyName,
-                    descripcion: descripcionPropiedad,
-                    label: labelPropiedad,
-                    urlimagen: urlImagen,
-                    favorito: false,
-                    anotaciones: [
+                  
+                  let itemFavorito;
+                  for(let k=0, item; item = listaFavoritos[k]; k++)
+                  {
+                      if(item.idtopico == propertyName)
                       {
-                        nombre: "anotacion1",
-                        detalle: "detalle1"
-                      },
-                      {
-                        nombre: "anotacion2",
-                        detalle: "detalle2"
+                        itemFavorito = item;
+                        break
                       }
-                    ]
-                  };
+                  }
+                  if(itemFavorito === undefined)
+                  {
+                    var item = {
+                      idtopico: propertyName,
+                      descripcion: descripcionPropiedad,
+                      label: labelPropiedad,
+                      urlimagen: urlImagen,
+                      favorito: false,
+                      anotaciones: []
+                    };                   
+  
+                    listacompuesta.push(item);
+
+                  }
+                  else
+                  {
+                    listacompuesta.push(itemFavorito);
+                  }
 
                   urlImagen = undefined;
-                  listacompuesta.push(item);
-                  
                 }
               }
 
