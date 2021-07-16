@@ -45,7 +45,13 @@ var listaFavoritos = [{
 app.delete('/quitarfavorito', function(req, response){
   console.log(req.body);
   let itemFavorito = req.body;
-  listaFavoritos.push(itemFavorito);  
+
+  listaFavoritos.forEach(function(result, index) {
+    if(result['idtopico'] === itemFavorito.idtopico) {
+      listaFavoritos.splice(index, 1);
+    }    
+  });
+
   response.sendStatus(201);  
 });
 
