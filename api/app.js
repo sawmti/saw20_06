@@ -42,6 +42,21 @@ var listaFavoritos = [{
   ],
 }];
 
+app.post('/modificartema', function(req, response){
+  console.log(req.body);
+  let itemmodificar = req.body;
+
+  listaFavoritos.forEach(function(result, index) {
+    if(result['idtopico'] === itemmodificar.idtopico) {
+      result['descripcion'] = itemmodificar.descripcion;
+      result['label'] = itemmodificar.label;
+      result['anotaciones'] = itemmodificar.anotaciones;
+    }    
+  });
+
+  response.sendStatus(201);  
+});
+
 app.delete('/quitarfavorito', function(req, response){
   console.log(req.body);
   let itemFavorito = req.body;
