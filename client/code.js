@@ -44,9 +44,15 @@ $(window).load(function () {
             }
 
             let filasAnotacionesInput = '';
+            var cantidadAnotaciones = 0;
             for (let k = 0, anotacionInput; anotacionInput = fila.anotaciones[k]; k++)
             {
-                filasAnotacionesInput+= `<tr><td><input type="text" placeholder="Ingresar descripción" value="${anotacionInput.nombre}" /></td><td>:</td><td><input type="text" placeholder="Ingresar valor" value="${anotacionInput.detalle}" /></td></tr>`;
+                cantidadAnotaciones++;
+                filasAnotacionesInput+= `<tr id="filaAnotacion_${fila.idtopico}_${k}">
+                                            <td><span style="margin-right: 5px;color: red; text-decoration: underline; cursor: pointer;" class="borrarAnotacion" id="borrarAnotacion_${fila.idtopico}_${k}">X</span></td>
+                                            <td class="nombre"><input type="text" placeholder="Ingresar descripción" value="${anotacionInput.nombre}" id="descripcionAnotacion_${fila.idtopico}_${k}" /></td>
+                                            <td>:</td><td class="detalle"><input type="text" placeholder="Ingresar valor" value="${anotacionInput.detalle}" id="valorAnotacion_${fila.idtopico}_${k}" /></td>
+                                        </tr>`;                
             }
 
             div.innerHTML = `
@@ -69,13 +75,15 @@ $(window).load(function () {
                 <div class="col-md-7 ${sideClassDiv}" id="opciones_${fila.idtopico}" style="display: none;">
                     <h3>Modificar Datos (${fila.idtopico})</h3>
                     <table>
-                        <tr> <td>Titulo</td>      <td>:<input type="text" value="${fila.descripcion}"/> </td></tr>
-                        <tr> <td>Descripción</td> <td>:<input type="text" value="${fila.label}"/>       </td></tr>
+                        <tr> <td>Titulo</td>     <td>:</td> <td><input id="titulotopico_${fila.idtopico}" type="text" value="${fila.descripcion}"/> </td></tr>
+                        <tr> <td>Descripción</td> <td>:</td> <td><input id="descripciontopico_${fila.idtopico}" type="text" value="${fila.label}"/>       </td></tr>
                         <tr><td></td></tr>
-                    </table>
-                    <span style="font-size: 20px;font-weight: bold;">Anotaciones:</span>
-                    <span style="margin-left: 10px;color: blue; text-decoration: underline; cursor: pointer;" id="agregarAnotacion_${fila.idtopico}" class="agregarAnotacion">Agregar anotación</span>
-                    <table id="tableAnotacionesInput_${fila.idtopico}"> ${filasAnotacionesInput} </table>
+                    </table>                    
+                    <div style="min-height: 130px;">
+                        <span style="font-size: 20px;font-weight: bold;">Anotaciones:</span>
+                        <span style="margin-left: 10px;color: blue; text-decoration: underline; cursor: pointer;" id="agregarAnotacion_${fila.idtopico}" class="agregarAnotacion">Agregar anotación</span>
+                        <table id="tableAnotacionesInput_${fila.idtopico}"> ${filasAnotacionesInput} </table>
+                    </div>
                     <br>
                     <input type="button" value="Grabar"   class="boton1 btnOpcionesGrabar" id="btnOpcionesGrabar_${fila.idtopico}"></input>                            
                     <input type="button" value="Cancelar" class="boton4 btnOpcionesVolver" id="btnOpcionesVolver_${fila.idtopico}"></input>                            
@@ -91,18 +99,101 @@ $(window).load(function () {
             contenedor.appendChild(div);
         }
 
-        $(".agregarAnotacion").unbind('click');
-        $(".agregarAnotacion").click(function(e){
-            let idDiv = e.currentTarget.id.replace("agregarAnotacion_","");
-            $("#tableAnotacionesInput_"+idDiv).append(`<tr><td><input type="text" placeholder="Ingresar descripción" /></td><td>:</td><td><input type="text" placeholder="Ingresar valor" /></td></tr>`)
-        });
-        
-
         $(".btnOpcionesGrabar").unbind('click');
         $(".btnOpcionesGrabar").click(function(e){
             //debugger;
-            let idDiv = e.currentTarget.id.replace("btnOpcionesGrabar_","");
-            alert(`Grabar opciones tema: ${idDiv}`);
+            let idDiv = e.currentTarget. id.replace("btnOpcionesGrabar_","");
+
+            let listadoAnotaciones = [];
+            $(`#tableAnotacionesInput_${idDiv} > tbody  > tr`).each(function(index, tr) {                
+                //debugger;
+                let fila = {
+                    nombre: "",
+                    detalle: ""
+                }
+                for(let i=0, celda; celda = tr.childNodes[i] ; i++) {
+                    if(celda.className == "nombre") fila.nombre = celda.childNodes[0].value;
+                    if(celda.className == "detalle") fila.detalle = celda.childNodes[0].value;
+                }
+                listadoAnotaciones.push(fila);
+             });
+
+            //debugger;
+            var item = {
+                idtopico: idDiv,
+                descripcion: $("#titulotopico_"+idDiv)[0].value,
+                label: $("#descripciontopico_"+idDiv)[0].value,                
+                anotaciones: listadoAnotaciones
+              };        
+
+            fetch('/modificartema',{
+                method: 'post',
+                headers: {
+                  'Accept': 'application/json, text/plain, */*',
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(item)
+            })
+            .then(res => res.text())
+            .then(result => {                        
+                if(result == "Created")
+                {
+                    //debugger;
+                    $("#titulo_"+idDiv)[0].innerHTML =  $("#titulotopico_"+idDiv)[0].value;
+                    $("#descripcion_"+idDiv)[0].innerHTML =  $("#descripciontopico_"+idDiv)[0].value;
+
+                    let filaAnotacionesMod = "";
+                    for(let j=0, anot; anot = listadoAnotaciones[j] ; j++)
+                    {
+                        filaAnotacionesMod += `<tr> <td><span>${anot.nombre}</span></td> <td>:<span>${anot.detalle}</span> </td></tr>`;
+                    }
+                    $("#tableAnotaciones_"+idDiv)[0].innerHTML = "";
+                    $("#tableAnotaciones_"+idDiv).append(filaAnotacionesMod);
+
+                    setTimeout(function(){$("#opciones_"+idDiv).hide("fade", 500);}, 1);
+                    setTimeout(function(){$("#card_"+idDiv).show("fade", 500);}, 500);
+                    return;
+                }
+                alert(result);
+            });
+            
+        });
+
+        $(".btnOpcionesVolver").unbind('click');
+        $(".btnOpcionesVolver").click(function(e){
+            //debugger;
+            let idDiv = e.currentTarget.id.replace("btnOpcionesVolver_","");                
+
+            setTimeout(function(){$("#opciones_"+idDiv).hide("fade", 500);}, 1);
+            setTimeout(function(){$("#card_"+idDiv).show("fade", 500);}, 500);
+        });
+
+        $(".borrarAnotacion").unbind('click');
+        $(".borrarAnotacion").click(function(e){
+            let idDiv = e.currentTarget.id.replace("borrarAnotacion_","");
+
+            var elem = document.getElementById(`filaAnotacion_${idDiv}`);
+            elem.parentNode.removeChild(elem);            
+        });
+
+        $(".agregarAnotacion").unbind('click');
+        $(".agregarAnotacion").click(function(e){
+            let idDiv = e.currentTarget.id.replace("agregarAnotacion_","");
+            let filaAnotacion = `<tr id="filaAnotacion_${idDiv}_${cantidadAnotaciones}">
+                                    <td><span style="margin-right: 5px;color: red; text-decoration: underline; cursor: pointer;" class="borrarAnotacionInterna" id="borrarAnotacion_${idDiv}_${cantidadAnotaciones}">X</span></td>
+                                    <td class="nombre"><input type="text" placeholder="Ingresar descripción" id="descripcionAnotacion_${idDiv}_${cantidadAnotaciones}" /></td>
+                                    <td>:</td><td class="detalle"><input type="text" placeholder="Ingresar valor" id="valorAnotacion_${idDiv}_${cantidadAnotaciones}" /></td>
+                                </tr>`;
+            $("#tableAnotacionesInput_"+idDiv).append(filaAnotacion);
+            cantidadAnotaciones++;
+
+            $(".borrarAnotacionInterna").unbind('click');
+            $(".borrarAnotacionInterna").click(function(e){
+                let idDiv = e.currentTarget.id.replace("borrarAnotacion_","");
+    
+                var elem = document.getElementById(`filaAnotacion_${idDiv}`);
+                elem.parentNode.removeChild(elem);            
+            });
         });
 
         $(".btnQuitar").unbind('click');
@@ -137,10 +228,6 @@ $(window).load(function () {
                         }
                         alert(result);
                     });
-
-
-
-
                     break;
                 }
             }
@@ -191,15 +278,6 @@ $(window).load(function () {
             setTimeout(function(){$("#card_"+idDiv).hide("fade", 500);}, 1);
             setTimeout(function(){$("#opciones_"+idDiv).show("fade", 500);}, 500);
             
-        });
-
-        $(".btnOpcionesVolver").unbind('click');
-        $(".btnOpcionesVolver").click(function(e){
-            //debugger;
-            let idDiv = e.currentTarget.id.replace("btnOpcionesVolver_","");                
-
-            setTimeout(function(){$("#opciones_"+idDiv).hide("fade", 500);}, 1);
-            setTimeout(function(){$("#card_"+idDiv).show("fade", 500);}, 500);
         });
 
     }
