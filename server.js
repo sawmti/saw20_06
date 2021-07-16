@@ -12,7 +12,7 @@ app.listen(port, () => {
 // // import { MongoClient } from 'mongodb'
 
 // // Connection URL
-// const url = 'mongodb+srv://admin:123@cluster0.uzikc.mongodb.net/Cluster0?retryWrites=true&w=majority'
+// const url = ???
 // const client = new MongoClient(url)
 
 // // Database Name
