@@ -64,7 +64,7 @@ $(window).load(function () {
                 if(idDiv == "3")
                 {
                     div.innerHTML = `
-                    <li> ${fila.label} (${fila.nacimiento})  <a href="https://www.wikidata.org/wiki/${fila.codigo}">${fila.codigo}</a></li>
+                    <li> ${fila.fundador} (${fila.label})  <a href="https://www.wikidata.org/wiki/${fila.fundadorCodigo}">${fila.fundadorCodigo}</a></li>
                    `;
                 }
                 

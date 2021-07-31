@@ -98,7 +98,9 @@ app.get('/ejecutarQuery/:txtquery', function(req, response) {
         label: res.item.label,
         region: res.regionLabel,
         poblacion: res.poblacion,
-        nacimiento: res.lugarNacimientoLabel
+        nacimiento: res.lugarNacimientoLabel,
+        fundador: res.fundador?.label,
+        fundadorCodigo: res.fundador?.value
       };
       listaQuery.push(itemresult);
     }

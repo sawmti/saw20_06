@@ -139,19 +139,18 @@ ORDER BY DESC (?poblacion)
           </div>
           <div style="width: 300px; display: table-cell;">              
             <tr>
-              <td><span style="font-size: 25px; font-weight: bold;">Cantantes Chilenos por Ciudad</span></td>
+              <td><span style="font-size: 25px; font-weight: bold;">Fundadores por Ciudad</span></td>
             </tr>
             <tr>                
               <td>
                 <textarea rows="12" cols="50" id="txtQuery3">
-select distinct ?item ?itemLabel ?lugarNacimientoLabel where {
- ?item wdt:P27 wd:Q298 .
- ?item wdt:P106 wd:Q177220 .
- ?item wdt:P19 ?lugarNacimiento .         
- ?item wdt:P21 ?sexo .     
- SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es". }
+select distinct ?item ?itemLabel ?fundadorLabel ?fundador where { 
+  ?item wdt:P17 wd:Q298 .
+  ?item wdt:P31 wd:Q25412763 .
+  ?item wdt:P112 ?fundador .            
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es". }
 }
-ORDER BY (?lugarNacimientoLabel)
+ORDER BY (?fundadorLabel)
                           </textarea>
               </td>
             </tr>
