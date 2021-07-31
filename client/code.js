@@ -11,7 +11,8 @@ $(window).load(function () {
         let contenedor = document.getElementById('divContenedor');
         contenedor.innerHTML = '';
         $("#divContenedor").hide();
-    });    
+        $("#divQuery").hide();
+    });
 
     $('#btnFavoritos').click(function(e){        
         fetch('/obtenerfavoritos')
@@ -19,9 +20,59 @@ $(window).load(function () {
         .then(json => {
             //debugger;            
             llenarEntidades(json, 'Temas Favoritos');
+            $("#divQuery").hide();
             $("#divContenedor").show("fade", 500);
-        });        
-    });    
+        });
+    });
+    
+    $('#btnQuery').click(function(e) {
+        let contenedor = document.getElementById('divContenedor');
+        contenedor.innerHTML = '';
+        $("#divContenedor").hide();
+        $("#divQuery").show("fade", 500);
+    });
+
+    $('.btnEjecutar').click(function(e) {
+        
+        let idDiv = e.currentTarget.id.replace("btnEjecutar_","");        
+        let query = $("#txtQuery"+idDiv)[0].value;
+        query = query.split('?').join('@');
+        fetch('/ejecutarQuery/'+query)
+        .then(res => res.json())
+        .then(json => {
+            debugger;
+            let contenedor = document.getElementById('divContendorQuery_'+idDiv);
+            contenedor.innerHTML = '';
+
+            for (let i = 0, fila; fila = json[i]; i++)
+            {
+                let div = document.createElement('div');
+                if(idDiv == "1")
+                {
+                    div.innerHTML = `
+                    <li> ${fila.label} (${fila.region})  <a href="https://www.wikidata.org/wiki/${fila.codigo}">${fila.codigo}</a></li>
+                   `;
+                }
+
+                if(idDiv == "2")
+                {
+                    div.innerHTML = `
+                    <li> ${fila.label} (${fila.poblacion})  <a href="https://www.wikidata.org/wiki/${fila.codigo}">${fila.codigo}</a></li>
+                   `;
+                }
+
+                if(idDiv == "3")
+                {
+                    div.innerHTML = `
+                    <li> ${fila.label} (${fila.nacimiento})  <a href="https://www.wikidata.org/wiki/${fila.codigo}">${fila.codigo}</a></li>
+                   `;
+                }
+                
+                contenedor.appendChild(div);
+            }            
+
+        });
+    });
 
     function llenarEntidades(datos, titulo)
     {

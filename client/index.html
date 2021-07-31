@@ -57,6 +57,9 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#" id="btnFavoritos">Favoritos</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#" id="btnQuery">Query(SparQL)</a>
+          </li>
         </ul>
         <div class="d-flex">
           <input class="form-control me-2" type="search" placeholder="" aria-label="Search" id="txtBuscar">
@@ -73,6 +76,103 @@
   <div class="container marketing">
     <div id="divContenedor" style="margin-top: 25px; min-height: 700px; display: none;">
     </div>
+
+    <div id="divQuery" style="margin-top: 25px; min-height: 700px; display: none;">
+      <div style="width: 100%; display: table;">
+        <div style="display: table-row">
+            <div style="width: 300px; display: table-cell;"> <table>
+              <tr>
+                <td><span style="font-size: 25px; font-weight: bold;">Ciudades de Chile</span></td>
+              </tr>
+              <tr>                
+                <td>
+                  <textarea rows="12" cols="50" id="txtQuery1">
+select distinct ?item ?itemLabel ?regionLabel where {
+     ?item wdt:P31 wd:Q25412763 .
+     ?item wdt:P1376 ?region
+     SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es". }
+}
+ORDER BY(?itemLabel)
+                            </textarea>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <button class="btn btn-outline-success btnEjecutar" id="btnEjecutar_1" style="text-align: right;">Ejecutar</button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div id="divContendorQuery_1"></div>
+                </td>
+              </tr>
+            </table> 
+          </div>
+          <div style="width: 300px; display: table-cell;">              
+            <tr>
+              <td><span style="font-size: 25px; font-weight: bold;">Filtro Por Población</span></td>
+            </tr>
+            <tr>                
+              <td>
+                <textarea rows="12" cols="50" id="txtQuery2">
+select distinct ?item ?itemLabel ?poblacion where {
+    ?item wdt:P31 wd:Q25412763 ;           
+    wdt:P1082 ?poblacion
+    FILTER(?poblacion > 50000)
+    SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es". }
+}
+ORDER BY DESC (?poblacion)
+                          </textarea>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button class="btn btn-outline-success btnEjecutar" id="btnEjecutar_2" style="text-align: right;">Ejecutar</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div id="divContendorQuery_2"></div>
+              </td>
+            </tr>
+          </table> 
+          </div>
+          <div style="width: 300px; display: table-cell;">              
+            <tr>
+              <td><span style="font-size: 25px; font-weight: bold;">Cantantes Chilenos por Ciudad</span></td>
+            </tr>
+            <tr>                
+              <td>
+                <textarea rows="12" cols="50" id="txtQuery3">
+select distinct ?item ?itemLabel ?lugarNacimientoLabel where {
+ ?item wdt:P27 wd:Q298 .
+ ?item wdt:P106 wd:Q177220 .
+ ?item wdt:P19 ?lugarNacimiento .         
+ ?item wdt:P21 ?sexo .     
+ SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es". }
+}
+ORDER BY (?lugarNacimientoLabel)
+                          </textarea>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button class="btn btn-outline-success btnEjecutar" id="btnEjecutar_3" style="text-align: right;">Ejecutar</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div id="divContendorQuery_3"></div>
+              </td>
+            </tr>
+          </table> 
+          </div>
+        </div>
+    </div>    
+
+
+    </div>
+
   </div>
   
 

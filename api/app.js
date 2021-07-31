@@ -81,6 +81,33 @@ app.get('/obtenerfavoritos', function(req, response){
   response.send(listaFavoritos);
 });
 
+app.get('/ejecutarQuery/:txtquery', function(req, response) {
+  let query = req.params.txtquery;
+  query = query.replace(/@/g, '?');
+  const url = wbk.sparqlQuery(query);
+  fetch(url)  
+  .then(res => res.json())
+  .then(json => {
+
+    let listaQuery = [];
+    let data = wbk.simplify.sparqlResults(json, { minimize: true })
+    for(let i = 0, res; res = data[i];i++)    
+    {
+      let itemresult = {
+        codigo: res.item.value,
+        label: res.item.label,
+        region: res.regionLabel,
+        poblacion: res.poblacion,
+        nacimiento: res.lugarNacimientoLabel
+      };
+      listaQuery.push(itemresult);
+    }
+
+    response.send(listaQuery);
+  });
+
+});
+
 app.get('/entidades/:txtEntidad', function(req, response){  
 
   let entidad = req.params.txtEntidad;
